@@ -10,3 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial project skeleton under the DimSpin name: MIT license, packaging
   metadata, tests and CI workflow.
+- Numerical foundation: spin operators, tensor helpers, rotation/Euler
+  utilities, line broadening (direct and FFT), powder orientation sampling,
+  and parallel helpers.

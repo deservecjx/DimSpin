@@ -71,3 +71,4 @@ exclude = [".git", "build", "dist", ".venv", "venv"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I"]
+ignore = ["E741"] # I is the conventional symbol for nuclear spin.
