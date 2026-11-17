@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+title: "DimSpin"
+abstract: "EPR/ESR spectrum simulator for spin Hamiltonians and spin-electric coupling (SEC) tensors, featuring electric-field modulation (EFM), magnetic-field modulation (MFM), and 2D angle-dependent single-crystal analysis."
+authors:
+  - family-names: "Chen"
+    given-names: "Jia-Xin"
+version: "0.1.0.dev0"
+license: "MIT"
+repository-code: "https://github.com/deservecjx/DimSpin"
