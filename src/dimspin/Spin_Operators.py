@@ -1,4 +1,4 @@
-"""Spin and nuclear-spin operator matrices in the product basis."""
+"""Electron spin and nuclear-spin operator matrices."""
 
 from functools import lru_cache
 
@@ -7,7 +7,7 @@ import numpy as np
 
 @lru_cache(maxsize=None)
 def Sz_get(S, I):
-    """Return the electron-spin z operator in the product basis."""
+    """Return the electron-spin z operator."""
     levels = int(2 * S + 1)
     sz = np.zeros((levels, levels))
     for ii in range(levels):
@@ -37,19 +37,19 @@ def Sm(S):
 
 @lru_cache(maxsize=None)
 def Sx_get(S, I):
-    """Return the electron-spin x operator in the product basis."""
+    """Return the electron-spin x operator."""
     return np.kron((Sp(S) + Sm(S)) / 2, np.identity(int(2 * I + 1)))
 
 
 @lru_cache(maxsize=None)
 def Sy_get(S, I):
-    """Return the electron-spin y operator in the product basis."""
+    """Return the electron-spin y operator."""
     return np.kron((Sp(S) - Sm(S)) / (2j), np.identity(int(2 * I + 1)))
 
 
 @lru_cache(maxsize=None)
 def Iz_get(S, I):
-    """Return the nuclear-spin z operator in the product basis."""
+    """Return the nuclear-spin z operator."""
     levels = int(2 * I + 1)
     iz = np.zeros((levels, levels))
     for ii in range(levels):
@@ -79,11 +79,11 @@ def Im(I):
 
 @lru_cache(maxsize=None)
 def Ix_get(S, I):
-    """Return the nuclear-spin x operator in the product basis."""
+    """Return the nuclear-spin x operator."""
     return np.kron(np.identity(int(2 * S + 1)), (Ip(I) + Im(I)) / 2)
 
 
 @lru_cache(maxsize=None)
 def Iy_get(S, I):
-    """Return the nuclear-spin y operator in the product basis."""
+    """Return the nuclear-spin y operator."""
     return np.kron(np.identity(int(2 * S + 1)), (Ip(I) - Im(I)) / (2j))
