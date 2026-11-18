@@ -19,6 +19,9 @@ class ToySpin:
         self.S, self.I = S, I
         self.total_Level = int(round((2 * S + 1) * (2 * I + 1)))
         self.g1 = np.asarray(g, dtype=float)
+        self.g = g
+        self.D = np.zeros((3, 3)) if D is None else D
+        self.A = np.zeros((3, 3)) if A is None else A
         self.dg1 = np.zeros((3, 3)) if dg is None else np.asarray(dg, dtype=float)
         self.dD1 = np.zeros((3, 3))
         self.dA1 = np.zeros((3, 3))
@@ -53,6 +56,34 @@ class ToySpin:
         sign = -1.0 if symbol == 'negative' else 1.0
         self.H_total = (self.H_initial + sign * self.H_Einitial
                         + Bz * self.H_g_grad + sign * Bz * self.H_T_grad)
+
+    def identity_tensor(self):
+        """Normalize g, D and A to 3x3 as the real Spin does before expansion."""
+        g = np.asarray(self.g, dtype=float)
+        if g.ndim == 0:
+            self.g = g * np.eye(3)
+        elif g.shape == (3,):
+            self.g = np.diag(g)
+        elif g.shape != (3, 3):
+            raise ValueError("g tensor must be a scalar, a 3-vector or a 3x3 matrix")
+
+        D = np.asarray(self.D, dtype=float)
+        if self.S == 0.5:
+            self.D = np.zeros((3, 3))
+        elif D.shape == (2,):
+            self.D = np.diag([-D[0] / 3 + D[1], -D[0] / 3 - D[1], 2 * D[0] / 3])
+        elif D.shape == (3,):
+            self.D = np.diag(D)
+        elif D.shape != (3, 3):
+            self.D = np.zeros((3, 3))
+
+        A = np.asarray(self.A, dtype=float)
+        if self.I == 0:
+            self.A = np.zeros((3, 3))
+        elif A.shape == (3,):
+            self.A = np.diag(A)
+        elif A.shape != (3, 3):
+            self.A = np.zeros((3, 3))
 
 
 def make_spec(modtype, **overrides):

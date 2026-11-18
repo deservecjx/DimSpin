@@ -43,3 +43,10 @@ MIT. See [LICENSE](LICENSE).
 
 If you use DimSpin in your work, please cite it. Citation metadata is
 provided in [CITATION.cff](CITATION.cff).
+
+## Third-party data
+
+The space-group operations in `dimspin.Space_Group` are generated with
+[spglib](https://spglib.readthedocs.io) (BSD-3 license). Please cite
+A. Togo, K. Shinohara and I. Tanaka, *Sci. Technol. Adv. Mater. Methods* 4,
+2384822 (2024), doi:10.1080/27660400.2024.2384822.
