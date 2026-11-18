@@ -3,15 +3,11 @@
 import numpy as np
 from toy_spin import G_ISO, ToySpin, make_spec
 
-from dimspin.Adaptive_Grid_Method import (
-    _cubic_roots_t,
-    _dedup_roots,
-    adaptive_grid_method,
-    truncate_observable,
-)
+from dimspin.Adaptive_Grid_Method import _cubic_roots_t, _dedup_roots, adaptive_grid_method
 from dimspin.Eigenfield_Method import _build_H0_H1, eigenfield_method
 from dimspin.High_Field_Method import high_field_method
 from dimspin.Team_Zeeman import MU_B_H
+from dimspin.Truncate_Observable import truncate_observable
 
 ISO = G_ISO * np.eye(3)
 

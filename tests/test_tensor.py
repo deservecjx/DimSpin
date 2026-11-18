@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from dimspin.Tensor import Atensor, Dtensor, Tijk2Txyz, gtensor
+from dimspin.Tensor import Atensor, Dtensor, Tijk2Txyz, gtensor, unpack_tensor_3x5, unpack_tensor_3x6
 
 
 def test_gtensor() -> None:
@@ -33,3 +33,24 @@ def test_tijk2txyz_mapping_and_symmetry() -> None:
 
     for matrix in (Tx, Ty, Tz):
         assert np.allclose(matrix, matrix.T)
+
+
+def test_unpack_tensor_3x6_matches_component_split() -> None:
+    packed = np.array([[1.0, 2.0, 3.0, 4.0, 5.0, 6.0],
+                       [7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+                       [13.0, 14.0, 15.0, 16.0, 17.0, 18.0]])
+    stack = unpack_tensor_3x6(packed)
+    assert stack.shape == (3, 3, 3)
+    assert np.allclose(stack[0], [[1.0, 6.0, 5.0], [6.0, 2.0, 4.0], [5.0, 4.0, 3.0]])
+
+
+def test_unpack_tensor_3x5_is_traceless() -> None:
+    short = np.array([[1.0, 2.0, 3.0, 4.0, 5.0],
+                      [6.0, 7.0, 8.0, 9.0, 10.0],
+                      [11.0, 12.0, 13.0, 14.0, 15.0]])
+    stack = unpack_tensor_3x5(short)
+    assert stack.shape == (3, 3, 3)
+    assert np.isclose(np.trace(stack[0]), 0.0)
+    assert np.allclose(stack[0], [[-1.0 / 3 + 2, 5.0, 4.0],
+                                  [5.0, -1.0 / 3 - 2, 3.0],
+                                  [4.0, 3.0, 2.0 / 3]])

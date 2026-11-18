@@ -206,30 +206,3 @@ def adaptive_grid_method(spin, spec, modulation_symbol, tol=0.1, max_depth=20,
     pairs = _resonating_pairs(segments, spec.mwfreq, H0.shape[0])
     roots = _dedup_roots(_spline_roots(segments, spec.mwfreq, pairs))
     return _backfill(H0, H1, spec.mwfreq, spin, spec, roots, tol_freq=tol_freq)
-
-
-def truncate_observable(transitions, num_allowed, rel_thresh=1e-3):
-    """
-    Inputs: transitions (field, jj, kk, intensity); number of allowed
-    transitions to keep; relative intensity threshold.
-
-    Returns: the kept transitions, sorted by decreasing intensity magnitude.
-
-    Notes: the ``num_allowed`` strongest transitions are always kept; beyond
-    them, a transition is kept only while its intensity exceeds
-    ``rel_thresh`` times the maximum, which keeps observable forbidden lines
-    in systems with large anisotropy.
-    """
-    if not transitions:
-        return []
-    ts = sorted(transitions, key=lambda t: -abs(t[3]))
-    max_int = abs(ts[0][3])
-    if max_int <= 0.0:
-        return []
-    keep = list(ts[:num_allowed])
-    for t in ts[num_allowed:]:
-        if abs(t[3]) > rel_thresh * max_int:
-            keep.append(t)
-        else:
-            break
-    return keep

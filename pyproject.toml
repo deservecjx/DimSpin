@@ -44,6 +44,7 @@ dev = [
     "ruff>=0.6",
     "build>=1.2",
     "twine>=5",
+    "matplotlib>=3.6",
 ]
 
 [project.urls]
