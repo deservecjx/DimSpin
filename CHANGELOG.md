@@ -24,3 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Public API, five runnable examples, Sphinx documentation and CI checks for
   tests, coverage, packaging and the documentation build.
 
+### Notes
+
+- `Fused_Method` is not included in this release.
+- Archived on Zenodo: version DOI 10.5281/zenodo.24358713, concept DOI
+  10.5281/zenodo.24358712.

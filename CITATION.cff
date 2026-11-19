@@ -9,6 +9,11 @@ version: "0.1.0"
 date-released: "2026-11-19"
 license: "MIT"
 repository-code: "https://github.com/deservecjx/DimSpin"
+doi: "10.5281/zenodo.24358713"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24358712"
+    description: "Concept DOI for all versions"
 preferred-citation:
   type: article
   title: "Quantification of the Molecular Spin-Electric Coupling Tensors: An EPR-Based Approach"

@@ -1,5 +1,7 @@
 # DimSpin
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24358712.svg)](https://doi.org/10.5281/zenodo.24358712)
+
 DimSpin is an EPR/ESR spectrum simulator for spin Hamiltonians and
 spin-electric coupling (SEC) tensors (T, R, F), featuring electric-field
 modulation (EFM), magnetic-field modulation (MFM), and 2D angle-dependent
@@ -87,7 +89,11 @@ If you use DimSpin in your work, please cite the associated article:
 > *Quantification of the Molecular Spin-Electric Coupling Tensors: An
 > EPR-Based Approach*, 2026 (in preparation).
 
-Until the article is published, please cite this repository and its version.
+Until the article is published, please cite the archived software release:
+
+> DimSpin 0.1.0, Zenodo, doi:10.5281/zenodo.24358713 (version DOI);
+> doi:10.5281/zenodo.24358712 (concept DOI for all versions).
+
 Full citation metadata is provided in [CITATION.cff](CITATION.cff).
 
 ## References
