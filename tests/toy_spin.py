@@ -68,7 +68,7 @@ class ToySpin:
             raise ValueError("g tensor must be a scalar, a 3-vector or a 3x3 matrix")
 
         D = np.asarray(self.D, dtype=float)
-        if self.S == 0.5:
+        if self.S == 1 / 2:
             self.D = np.zeros((3, 3))
         elif D.shape == (2,):
             self.D = np.diag([-D[0] / 3 + D[1], -D[0] / 3 - D[1], 2 * D[0] / 3])

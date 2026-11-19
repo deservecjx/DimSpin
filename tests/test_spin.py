@@ -9,7 +9,7 @@ from dimspin.Class_Spin import Spin
 from dimspin.Tensor import Dtensor
 
 
-def quiet_spin(S=0.5, I=0.5):
+def quiet_spin(S=1/2, I=0.5):
     logging.disable(logging.WARNING)
     return Spin(S, I)
 
@@ -55,7 +55,7 @@ def test_vectors_are_expanded_to_diagonal_matrices() -> None:
 
 
 def test_s_half_clears_zfs_and_i_zero_clears_hyperfine() -> None:
-    spin = quiet_spin(S=0.5, I=0)
+    spin = quiet_spin(S=1/2, I=0)
     spin.g = 2.0
     spin.A = 100.0
     spin.identity_tensor()
@@ -129,7 +129,7 @@ def test_invalid_spin_quantum_numbers_are_rejected() -> None:
     with pytest.raises(ValueError):
         quiet_spin(S=-1, I=0).identity_tensor()
     with pytest.raises(ValueError):
-        quiet_spin(S=0.5, I=-1).identity_tensor()
+        quiet_spin(S=1/2, I=-1).identity_tensor()
 
 
 def test_non_finite_tensor_is_rejected() -> None:
@@ -204,7 +204,7 @@ def test_identity_tensor_stores_3x3x3_stacks_and_is_idempotent() -> None:
 
 def test_clean_spin_does_not_warn(caplog) -> None:
     logging.disable(logging.NOTSET)
-    spin = Spin(0.5, 0)
+    spin = Spin(1/2, 0)
     spin.g = 2.0
     with caplog.at_level(logging.WARNING):
         spin.identity_tensor()
@@ -213,7 +213,7 @@ def test_clean_spin_does_not_warn(caplog) -> None:
 
 def test_clearing_a_nonzero_zfs_warns(caplog) -> None:
     logging.disable(logging.NOTSET)
-    spin = Spin(0.5, 0)
+    spin = Spin(1/2, 0)
     spin.g = 2.0
     spin.D = 30.0
     with caplog.at_level(logging.WARNING):

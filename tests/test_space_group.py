@@ -83,7 +83,7 @@ def test_cartesian_rotation_for_p2_maps_axes() -> None:
 
 
 def make_ref_spin(g) -> ToySpin:
-    spin = ToySpin(0.5, 0.5, np.eye(3))
+    spin = ToySpin(1/2, 0.5, np.eye(3))
     spin.g = g
     spin.A = 245.0 * np.eye(3)
     return spin

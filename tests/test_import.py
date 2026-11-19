@@ -26,7 +26,7 @@ def test_public_objects_are_available() -> None:
 
 
 def test_minimal_simulation_through_the_public_api() -> None:
-    spin = dimspin.Spin(0.5, 0)
+    spin = dimspin.Spin(1/2, 0)
     spin.g = 2.0023
 
     spec = dimspin.Spec()

@@ -16,7 +16,7 @@ logging.disable(logging.WARNING)
 
 
 def make_spin(g=2.0023, A=None, dg=None):
-    spin = Spin(0.5, 0.5 if A is not None else 0)
+    spin = Spin(1/2, 1/2 if A is not None else 0)
     spin.g = g
     if A is not None:
         spin.A = A
@@ -100,7 +100,7 @@ def test_space_group_expansion_weights_by_multiplicity() -> None:
     spec.group_number = 3
     spectrum = autosim(make_spin(g=g), spec, parallel=False)
 
-    reference = Spin(0.5, 0)
+    reference = Spin(1/2, 0)
     reference.g = g
     orientations, multiplicities = build_space_group_orientations(reference, 3)
     expected = np.zeros(spec.specpoints)

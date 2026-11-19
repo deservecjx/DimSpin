@@ -26,7 +26,7 @@ def random_symmetric_tensor(seed: int) -> np.ndarray:
 def test_zeeman_free_electron_splitting() -> None:
     g = 2.0 * np.eye(3)
     field = 3300.0
-    energies = np.linalg.eigvalsh(H_Zeeman(field, g, 0.5, 0))
+    energies = np.linalg.eigvalsh(H_Zeeman(field, g, 1/2, 0))
     assert np.allclose(energies, [-MU_B_H * 2.0 * field / 2, MU_B_H * 2.0 * field / 2])
 
 
@@ -36,7 +36,7 @@ def test_zeeman_uses_only_the_z_row_of_g() -> None:
     g2 = np.ones((3, 3))
     g1[2] = [0.1, 0.2, 2.0]
     g2[2] = [0.1, 0.2, 2.0]
-    assert np.allclose(H_Zeeman(field, g1, 1.5, 0.5), H_Zeeman(field, g2, 1.5, 0.5))
+    assert np.allclose(H_Zeeman(field, g1, 3/2, 1/2), H_Zeeman(field, g2, 3/2, 1/2))
 
 
 def test_zeeman_is_linear_in_field() -> None:
@@ -53,7 +53,7 @@ def test_zfs_axial_eigenvalues() -> None:
 
 def test_isotropic_hyperfine_eigenvalues() -> None:
     a = 40.0
-    energies = np.sort(np.linalg.eigvalsh(H_Hyperfine(a * np.eye(3), 0.5, 0.5)))
+    energies = np.sort(np.linalg.eigvalsh(H_Hyperfine(a * np.eye(3), 1/2, 1/2)))
     assert np.allclose(energies, [-3 * a / 4, a / 4, a / 4, a / 4])
 
 
@@ -78,7 +78,7 @@ def test_zfs_matches_rank_two_stevens_operators() -> None:
 
 
 def test_stevens_operators_are_hermitian() -> None:
-    S, I = 3, 0.5
+    S, I = 3, 1/2
     R = rotation_matrix([1.0, 2.0, 3.0], 0.6)
     for k in (2, 4, 6):
         for q in range(-k, k + 1):
@@ -87,7 +87,7 @@ def test_stevens_operators_are_hermitian() -> None:
 
 
 def test_stevens_operators_vanish_above_twice_the_spin() -> None:
-    for S in (0.5, 1.5, 2.5):
+    for S in (1/2, 3/2, 5/2):
         for k in (2, 4, 6):
             if k > 2 * S:
                 for q in range(-k, k + 1):
@@ -146,7 +146,7 @@ def test_high_order_axial_term_is_invariant_under_rotation_about_z() -> None:
 
 
 def test_emod_t_matches_zeeman_with_a_combined_g_row() -> None:
-    S, I = 1.5, 0.5
+    S, I = 3/2, 1/2
     Tx, Ty, Tz = random_tensor(13), random_tensor(14), random_tensor(15)
     g = np.zeros((3, 3))
     g[2] = (Tx + Ty + Tz)[:, 2] / MU_B_H

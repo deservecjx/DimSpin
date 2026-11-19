@@ -12,7 +12,7 @@ logging.disable(logging.WARNING)
 
 
 def make_spin():
-    spin = Spin(0.5, 0)
+    spin = Spin(1/2, 0)
     spin.g = 2.0023
     return spin
 

@@ -4,7 +4,7 @@ from dimspin import Spec, Spin, autosim
 
 
 def main():
-    spin = Spin(0.5, 0)
+    spin = Spin(1/2, 0)
     spin.g = [2.0, 2.1, 1.9]
 
     spec = Spec()

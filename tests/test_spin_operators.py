@@ -25,7 +25,7 @@ def test_electron_spin_commutation() -> None:
 
 
 def test_nuclear_spin_commutation() -> None:
-    S, I = 0.5, 1.0
+    S, I = 1/2, 1
     Ix = Ix_get(S, I)
     Iy = Iy_get(S, I)
     Iz = Iz_get(S, I)

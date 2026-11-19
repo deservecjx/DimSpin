@@ -17,7 +17,7 @@ def fields_of(transitions):
 
 
 def test_free_electron_resonance_field() -> None:
-    spin = ToySpin(0.5, 0, ISO)
+    spin = ToySpin(1/2, 0, ISO)
     spec = make_spec('Bmod')
     transitions = adaptive_grid_method(spin, spec, 'positive')
 
@@ -28,7 +28,7 @@ def test_free_electron_resonance_field() -> None:
 
 
 def test_hyperfine_doublet_spacing() -> None:
-    spin = ToySpin(0.5, 0.5, ISO, A=100.0 * np.eye(3))
+    spin = ToySpin(1/2, 1/2, ISO, A=100.0 * np.eye(3))
     spec = make_spec('Bmod')
     fields = fields_of(adaptive_grid_method(spin, spec, 'positive'))
 
@@ -49,7 +49,7 @@ def test_axial_zfs_matches_eigenfield_reference() -> None:
 
 
 def test_eigenfield_matches_high_field_for_simple_systems() -> None:
-    spin = ToySpin(0.5, 0.5, ISO, A=100.0 * np.eye(3))
+    spin = ToySpin(1/2, 1/2, ISO, A=100.0 * np.eye(3))
     spec = make_spec('Bmod')
     high = fields_of(high_field_method(spin, spec, 'positive'))
     reference = fields_of(eigenfield_method(spin, spec, 'positive'))
@@ -60,7 +60,7 @@ def test_electric_field_modulation_shifts_resonance() -> None:
     T_zz = 0.2
     Tz = np.zeros((3, 3))
     Tz[2, 2] = T_zz
-    spin = ToySpin(0.5, 0, ISO, T=(np.zeros((3, 3)), np.zeros((3, 3)), Tz))
+    spin = ToySpin(1/2, 0, ISO, T=(np.zeros((3, 3)), np.zeros((3, 3)), Tz))
     spec = make_spec('Emod', E1=np.array([0.0, 0.0, 1.0]))
     transitions = adaptive_grid_method(spin, spec, 'positive')
 
@@ -71,7 +71,7 @@ def test_electric_field_modulation_shifts_resonance() -> None:
 
 def test_parameter_modulation_shifts_resonance() -> None:
     delta_g = -0.05
-    spin = ToySpin(0.5, 0, ISO, dg=delta_g * np.eye(3))
+    spin = ToySpin(1/2, 0, ISO, dg=delta_g * np.eye(3))
     spec = make_spec('param')
     transitions = adaptive_grid_method(spin, spec, 'positive')
 
@@ -81,7 +81,7 @@ def test_parameter_modulation_shifts_resonance() -> None:
 
 
 def test_build_H0_H1_is_linear_in_field() -> None:
-    spin = ToySpin(0.5, 0.5, ISO, A=100.0 * np.eye(3))
+    spin = ToySpin(1/2, 1/2, ISO, A=100.0 * np.eye(3))
     spec = make_spec('Bmod')
     H0, H1 = _build_H0_H1(spin, spec, 'positive')
 

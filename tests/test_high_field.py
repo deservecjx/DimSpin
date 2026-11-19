@@ -11,7 +11,7 @@ from dimspin.Team_Zeeman import MU_B_H
 
 
 def test_free_electron_resonance_field() -> None:
-    spin = ToySpin(0.5, 0, G_ISO * np.eye(3))
+    spin = ToySpin(1/2, 0, G_ISO * np.eye(3))
     spec = make_spec('Bmod')
     transitions = high_field_method(spin, spec, 'positive')
 
@@ -24,7 +24,7 @@ def test_free_electron_resonance_field() -> None:
 
 
 def test_hyperfine_doublet_spacing() -> None:
-    spin = ToySpin(0.5, 0.5, G_ISO * np.eye(3), A=100.0 * np.eye(3))
+    spin = ToySpin(1/2, 1/2, G_ISO * np.eye(3), A=100.0 * np.eye(3))
     spec = make_spec('Bmod')
     transitions = high_field_method(spin, spec, 'positive')
 
@@ -46,12 +46,12 @@ def test_axial_zfs_gives_two_transitions() -> None:
 
 
 def test_transition_probability_for_spin_half() -> None:
-    spin = ToySpin(0.5, 0, G_ISO * np.eye(3))
+    spin = ToySpin(1/2, 0, G_ISO * np.eye(3))
     spin.modulate_B(3500.0, 0.0)
     _, eigvecs = np.linalg.eigh(spin.H_total)
     expected = (G_ISO / 2) ** 2
-    assert np.isclose(transition_probability(0.5, 0, spin.g1, eigvecs, 0, 1), expected)
-    assert np.isclose(transition_probability(0.5, 0, spin.g1, eigvecs, 0, 0), 0.0)
+    assert np.isclose(transition_probability(1/2, 0, spin.g1, eigvecs, 0, 1), expected)
+    assert np.isclose(transition_probability(1/2, 0, spin.g1, eigvecs, 0, 0), 0.0)
 
 
 def test_population_difference_is_antisymmetric_and_small() -> None:
@@ -92,7 +92,7 @@ def test_electric_field_modulation_shifts_resonance() -> None:
     T_zz = 0.2
     Tz = np.zeros((3, 3))
     Tz[2, 2] = T_zz
-    spin = ToySpin(0.5, 0, G_ISO * np.eye(3), T=(np.zeros((3, 3)), np.zeros((3, 3)), Tz))
+    spin = ToySpin(1/2, 0, G_ISO * np.eye(3), T=(np.zeros((3, 3)), np.zeros((3, 3)), Tz))
     spec = make_spec('Emod', E1=np.array([0.0, 0.0, 1.0]))
     transitions = high_field_method(spin, spec, 'positive')
 
@@ -103,7 +103,7 @@ def test_electric_field_modulation_shifts_resonance() -> None:
 
 def test_parameter_modulation_shifts_resonance() -> None:
     delta_g = -0.05
-    spin = ToySpin(0.5, 0, G_ISO * np.eye(3), dg=delta_g * np.eye(3))
+    spin = ToySpin(1/2, 0, G_ISO * np.eye(3), dg=delta_g * np.eye(3))
     spec = make_spec('param')
     transitions = high_field_method(spin, spec, 'positive')
 
@@ -113,7 +113,7 @@ def test_parameter_modulation_shifts_resonance() -> None:
 
 
 def test_parameter_modulation_requires_delta_tensors() -> None:
-    spin = ToySpin(0.5, 0, G_ISO * np.eye(3))
+    spin = ToySpin(1/2, 0, G_ISO * np.eye(3))
     with pytest.raises(ValueError):
         high_field_method(spin, make_spec('param'), 'positive')
 
