@@ -17,8 +17,6 @@ single-crystal analysis.
 - Resonance search with `High_Field_Method` and `Adaptive_Grid_Method`
 - Voigt/Lorentzian/Gaussian line broadening, parallel evaluation and energy-level plots
 
-`Fused_Method` is not included in this release.
-
 ## Quick start
 
 ```python
@@ -38,6 +36,26 @@ spectrum = autosim(spin, spec)
 ```
 
 More complete scripts are in [`examples/`](examples).
+
+## Installation
+
+```bash
+pip install DimSpin
+```
+
+Plotting needs the optional extra:
+
+```bash
+pip install "DimSpin[plot]"
+```
+
+## Units and conventions
+
+Magnetic fields are in gauss, energies in MHz and temperatures in kelvin.
+Euler angles and rotation matrices use radians, while crystal-rotation ranges
+are in degrees. Line shapes are area-normalized. See the
+[documentation](docs/index.rst) for the Hamiltonian terms, frame conventions
+and method descriptions.
 
 ## Development setup
 
@@ -61,8 +79,16 @@ MIT. See [LICENSE](LICENSE).
 
 ## Citation
 
-If you use DimSpin in your work, please cite it. Citation metadata is
-provided in [CITATION.cff](CITATION.cff).
+If you use DimSpin in your work, please cite the associated article:
+
+> Jia-Xin Chen, You-Chao Liu, Qing-Song Deng, Ji-Min Song, Meng-Qi Zhong,
+> Meng-Xiang Wu, Zheng-Chuan Lin, Zheng Zhang, Song Gao, Ye-Xin Wang,
+> Zheng Liu and Shang-Da Jiang,
+> *Quantification of the Molecular Spin-Electric Coupling Tensors: An
+> EPR-Based Approach*, 2026 (in preparation).
+
+Until the article is published, please cite this repository and its version.
+Full citation metadata is provided in [CITATION.cff](CITATION.cff).
 
 ## Third-party data
 

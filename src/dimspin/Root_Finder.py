@@ -17,7 +17,8 @@ def transition_probability(S, I, g, eigvecs, jj, kk):
     Inputs: electron and nuclear spins; 3x3 g tensor; eigenvectors at the
     resonance field; level indices jj and kk.
 
-    Returns: |<kk|H1|jj>|^2, with H1 = g[0, :] . S the microwave coupling.
+    Returns: the squared matrix element ``|<kk|H1|jj>|^2``, with
+    H1 = g[0, :] . S the microwave coupling.
 
     Notes: the first row of ``g`` is used because the microwave field is taken
     along the laboratory x axis.

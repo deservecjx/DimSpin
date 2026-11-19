@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it using the metadata from this file."
+message: "If you use this software, please cite the article below. The article is currently in preparation; until it is published, please cite this repository and its version."
 title: "DimSpin"
 abstract: "EPR/ESR spectrum simulator for spin Hamiltonians and spin-electric coupling (SEC) tensors, featuring electric-field modulation (EFM), magnetic-field modulation (MFM), and 2D angle-dependent single-crystal analysis."
 authors:
@@ -8,3 +8,32 @@ authors:
 version: "0.1.0.dev0"
 license: "MIT"
 repository-code: "https://github.com/deservecjx/DimSpin"
+preferred-citation:
+  type: article
+  title: "Quantification of the Molecular Spin-Electric Coupling Tensors: An EPR-Based Approach"
+  authors:
+    - family-names: "Chen"
+      given-names: "Jia-Xin"
+    - family-names: "Liu"
+      given-names: "You-Chao"
+    - family-names: "Deng"
+      given-names: "Qing-Song"
+    - family-names: "Song"
+      given-names: "Ji-Min"
+    - family-names: "Zhong"
+      given-names: "Meng-Qi"
+    - family-names: "Wu"
+      given-names: "Meng-Xiang"
+    - family-names: "Lin"
+      given-names: "Zheng-Chuan"
+    - family-names: "Zhang"
+      given-names: "Zheng"
+    - family-names: "Gao"
+      given-names: "Song"
+    - family-names: "Wang"
+      given-names: "Ye-Xin"
+    - family-names: "Liu"
+      given-names: "Zheng"
+    - family-names: "Jiang"
+      given-names: "Shang-Da"
+  year: 2026

@@ -33,7 +33,7 @@ jobs:
 
       - name: Test
         shell: bash
-        run: pytest
+        run: pytest --cov=dimspin --cov-report=term-missing --cov-fail-under=80
 
       - name: Build
         shell: bash
@@ -42,3 +42,36 @@ jobs:
       - name: Check distribution
         shell: bash
         run: python -m twine check dist/*
+
+      - name: Install built wheel
+        shell: bash
+        run: |
+          pip install --force-reinstall --no-deps dist/*.whl
+          python -c "import dimspin; print(dimspin.__version__)"
+
+      - name: Run examples
+        if: runner.os == 'Linux' && matrix.python-version == '3.12'
+        shell: bash
+        env:
+          MPLBACKEND: Agg
+        run: |
+          for f in examples/*.py; do python "$f"; done
+
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[docs]"
+
+      - name: Build documentation
+        run: sphinx-build -W --keep-going -b html docs docs/_build
