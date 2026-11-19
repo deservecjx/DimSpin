@@ -5,8 +5,8 @@ spin-electric coupling (SEC) tensors (T, R, F), featuring electric-field
 modulation (EFM), magnetic-field modulation (MFM), and 2D angle-dependent
 single-crystal analysis.
 
-> **Status:** 0.1.0 development. The core modules and the public API are in
-> place; documentation and release metadata are being finalized.
+> **Status:** 0.1.0. Core modules, public API, documentation and examples are
+> in place.
 
 ## Planned scope
 

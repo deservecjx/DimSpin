@@ -5,7 +5,8 @@ abstract: "EPR/ESR spectrum simulator for spin Hamiltonians and spin-electric co
 authors:
   - family-names: "Chen"
     given-names: "Jia-Xin"
-version: "0.1.0.dev0"
+version: "0.1.0"
+date-released: "2026-11-19"
 license: "MIT"
 repository-code: "https://github.com/deservecjx/DimSpin"
 preferred-citation:

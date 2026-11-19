@@ -17,7 +17,7 @@ from .Class_Spec import Spec
 from .Class_Spin import Spin
 from .Levels_Plot import plot_energy_levels
 
-__version__ = "0.1.0.dev0"
+__version__ = "0.1.0"
 
 __all__ = [
     "Spin",
