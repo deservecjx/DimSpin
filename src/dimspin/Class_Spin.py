@@ -14,6 +14,20 @@ import logging
 import numpy as np
 
 
+def _array_any(value):
+    """
+    Inputs: tensor-like value.
+
+    Returns: True when the value contains a nonzero entry.
+
+    Notes: unreadable values count as nonzero so that the caller still warns.
+    """
+    try:
+        return bool(np.asarray(value).any())
+    except (TypeError, ValueError):
+        return True
+
+
 def _as_matrix(value, name, allow_scalar=False, scalar_factory=None,
                vector_factory=None, base_factory=None, two_factory=None):
     """
@@ -205,6 +219,9 @@ class Spin:
             setattr(self, name, value)
 
         if self.S == 1 / 2:
+            had_zfs = any(_array_any(value) for value in
+                          (self.D, self.Rx, self.Ry, self.Rz,
+                           self.B2, self.B4, self.B6))
             self.D = np.zeros((3, 3))
             self.Rx = np.zeros((3, 3))
             self.Ry = np.zeros((3, 3))
@@ -212,7 +229,8 @@ class Spin:
             self.B2 = np.zeros(5)
             self.B4 = np.zeros(9)
             self.B6 = np.zeros(13)
-            logging.warning('S = 1/2, No Zero Field Split effect!')
+            if had_zfs:
+                logging.warning('S = 1/2: zero-field splitting is not applicable and has been cleared.')
         else:
             self.D = _as_matrix(self.D, 'D', allow_scalar=True,
                                 scalar_factory=lambda x: Dtensor(x, 0.0),
@@ -223,7 +241,7 @@ class Spin:
         if not (self.Tx.any() or self.Ty.any() or self.Tz.any()
                 or self.Rx.any() or self.Ry.any() or self.Rz.any()
                 or self.Fx.any() or self.Fy.any() or self.Fz.any()):
-            logging.warning('Have not electric_field Tensor!')
+            logging.debug('No electric-field coupling tensor is set.')
 
         if self.D.any():
             conflicts = []
@@ -236,11 +254,14 @@ class Spin:
                                  'defined together with a non-zero D: ' + ', '.join(conflicts) + '.')
 
         if self.I == 0:
+            had_hyperfine = any(_array_any(value) for value in
+                                (self.A, self.Fx, self.Fy, self.Fz))
             self.A = np.zeros((3, 3))
             self.Fx = np.zeros((3, 3))
             self.Fy = np.zeros((3, 3))
             self.Fz = np.zeros((3, 3))
-            logging.warning('I = 0, No Hyperfine couping effect!')
+            if had_hyperfine:
+                logging.warning('I = 0: hyperfine coupling is not applicable and has been cleared.')
         else:
             self.A = _as_matrix(self.A, 'A', allow_scalar=True,
                                 scalar_factory=lambda x: x * np.eye(3),

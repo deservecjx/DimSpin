@@ -200,3 +200,32 @@ def test_identity_tensor_stores_3x3x3_stacks_and_is_idempotent() -> None:
     assert spin.F.shape == (3, 3, 3)
     assert spin.Tx[0, 0] == 1.0
     assert spin.Fy[1, 1] == 2.0
+
+
+def test_clean_spin_does_not_warn(caplog) -> None:
+    logging.disable(logging.NOTSET)
+    spin = Spin(0.5, 0)
+    spin.g = 2.0
+    with caplog.at_level(logging.WARNING):
+        spin.identity_tensor()
+    assert not [record for record in caplog.records if record.levelno >= logging.WARNING]
+
+
+def test_clearing_a_nonzero_zfs_warns(caplog) -> None:
+    logging.disable(logging.NOTSET)
+    spin = Spin(0.5, 0)
+    spin.g = 2.0
+    spin.D = 30.0
+    with caplog.at_level(logging.WARNING):
+        spin.identity_tensor()
+    assert any('zero-field' in record.getMessage() for record in caplog.records)
+
+
+def test_clearing_a_nonzero_hyperfine_warns(caplog) -> None:
+    logging.disable(logging.NOTSET)
+    spin = Spin(1, 0)
+    spin.g = 2.0
+    spin.A = 50.0
+    with caplog.at_level(logging.WARNING):
+        spin.identity_tensor()
+    assert any('hyperfine' in record.getMessage() for record in caplog.records)

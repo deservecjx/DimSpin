@@ -5,8 +5,8 @@ spin-electric coupling (SEC) tensors (T, R, F), featuring electric-field
 modulation (EFM), magnetic-field modulation (MFM), and 2D angle-dependent
 single-crystal analysis.
 
-> **Status:** 0.1.0 development. The package skeleton is in place; the physics
-> modules are added in subsequent releases.
+> **Status:** 0.1.0 development. The core modules and the public API are in
+> place; documentation and release metadata are being finalized.
 
 ## Planned scope
 
@@ -18,6 +18,26 @@ single-crystal analysis.
 - Voigt/Lorentzian/Gaussian line broadening, parallel evaluation and energy-level plots
 
 `Fused_Method` is not included in this release.
+
+## Quick start
+
+```python
+from dimspin import Spec, Spin, autosim
+
+spin = Spin(0.5, 0)
+spin.g = [2.009, 2.006, 2.002]
+
+spec = Spec()
+spec.mwfreq = 9560.0
+spec.fieldrange = [3300.0, 3600.0]
+spec.specpoints = 800
+spec.lw_lorentzian = 0.5
+spec.Bmod = 1.0
+
+spectrum = autosim(spin, spec)
+```
+
+More complete scripts are in [`examples/`](examples).
 
 ## Development setup
 
