@@ -10,6 +10,10 @@ without an iterative refinement step.
 The method makes no high-field assumption: it evaluates all level pairs that
 can cross the microwave frequency and therefore keeps forbidden and
 level-crossing transitions.
+
+Reference: S. Stoll and A. Schweiger, EasySpin, a comprehensive software
+package for spectral simulation and analysis in EPR, J. Magn. Reson. 178
+(2006) 42-55, doi:10.1016/j.jmr.2005.08.013.
 """
 
 import numpy as np

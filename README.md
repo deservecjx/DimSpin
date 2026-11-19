@@ -90,6 +90,14 @@ If you use DimSpin in your work, please cite the associated article:
 Until the article is published, please cite this repository and its version.
 Full citation metadata is provided in [CITATION.cff](CITATION.cff).
 
+## References
+
+The adaptive-grid resonance search follows ideas from EasySpin:
+
+> S. Stoll and A. Schweiger, *EasySpin, a comprehensive software package for
+> spectral simulation and analysis in EPR*, J. Magn. Reson. **178** (2006)
+> 42-55, doi:10.1016/j.jmr.2005.08.013.
+
 ## Third-party data
 
 The space-group operations in `dimspin.Space_Group` are generated with

@@ -37,3 +37,18 @@ preferred-citation:
     - family-names: "Jiang"
       given-names: "Shang-Da"
   year: 2026
+references:
+  - type: article
+    title: "EasySpin, a comprehensive software package for spectral simulation and analysis in EPR"
+    authors:
+      - family-names: "Stoll"
+        given-names: "Stefan"
+      - family-names: "Schweiger"
+        given-names: "Arthur"
+    journal: "Journal of Magnetic Resonance"
+    volume: 178
+    issue: 1
+    start: 42
+    end: 55
+    year: 2006
+    doi: "10.1016/j.jmr.2005.08.013"

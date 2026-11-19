@@ -66,6 +66,13 @@ Two methods are available:
 commutator superoperator and is available as an independent reference; its
 cost grows as the square of the level count.
 
+The adaptive-grid approach follows ideas from EasySpin [Stoll2006]_; DimSpin
+is an independent implementation and is not a port of EasySpin code.
+
+.. [Stoll2006] S. Stoll and A. Schweiger, *EasySpin, a comprehensive software
+   package for spectral simulation and analysis in EPR*, J. Magn. Reson.
+   178 (2006) 42-55, doi:10.1016/j.jmr.2005.08.013.
+
 Line broadening
 ---------------
 
