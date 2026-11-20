@@ -8,21 +8,26 @@ The simulated Hamiltonian is
 
 .. math::
 
-   H = \frac{\mu_B}{h}\, \mathbf{B}\cdot\mathbf{g}\cdot\mathbf{S}
+   H = \mu_B\, \mathbf{B}\cdot\mathbf{g}\cdot\mathbf{S}
      + \mathbf{S}\cdot\mathbf{D}\cdot\mathbf{S}
      + \mathbf{S}\cdot\mathbf{A}\cdot\mathbf{I}
      + \sum_{k,q} B_k^q O_k^q(\mathbf{S})
      + H_\mathrm{mod},
 
-where :math:`O_k^q` are the extended Stevens operators for k = 2, 4, 6 and
-:math:`H_\mathrm{mod}` collects the modulation terms:
+where :math:`\mu_B` is expressed in frequency units, :math:`O_k^q` are the
+extended Stevens operators for k = 2, 4, 6 and :math:`H_\mathrm{mod}` collects
+the modulation terms:
 
 - magnetic-field modulation: the field is shifted by the modulation amplitude
   with a positive or negative sign;
 - electric-field modulation: the SEC tensors T, R and F couple the electric
-  field to the Zeeman, zero-field and hyperfine terms;
-- parameter modulation: the amplitudes :math:`\Delta g`, :math:`\Delta D`,
-  :math:`\Delta A` define the modulation term.
+  field to the Zeeman, zero-field splitting and hyperfine terms;
+- parameter modulation: the modulation term is built directly from the
+  amplitudes :math:`\Delta g`, :math:`\Delta D` and :math:`\Delta A`. Our
+  apparatus keeps the electric field at a fixed orientation relative to the
+  crystal, so the modulated term is then constant in the crystal frame and
+  can be given directly, without going through the SEC tensors. The same
+  construction could also describe other perturbations, such as pressure.
 
 Units and conventions
 ---------------------
@@ -46,9 +51,12 @@ Orientations are composed as
 
 where the crystal orientation maps the crystal frame to the laboratory frame,
 the molecular orientation maps the molecular frame to the crystal frame, and
-the tensor orientation maps the tensor frame to the molecular frame. Euler
-angles use the zyz convention. Second-order tensors transform as
-:math:`R T R^{T}`; improper operations with determinant -1 are accepted.
+the tensor orientation maps the tensor frame to the molecular frame. The
+molecular orientation is not a user-set frame: it is the identity in an
+ordinary calculation, and the space-group expansion fills it with the rotation
+of each inequivalent site. Euler angles use the zyz convention. Second-order
+tensors transform as :math:`R T R^{T}`; improper operations with determinant
+-1 are accepted.
 
 Resonance search
 ----------------
@@ -84,9 +92,11 @@ the field grid by direct evaluation so their tails are retained.
 Limitations
 -----------
 
-- ``Fused_Method`` is not included in this release.
+- A further resonance-search method, aimed at faster and more accurate root
+  finding, is under development; it is still being tested and is not part of
+  this release.
 - The space-group expansion rotates the second-order tensors g, D and A; the
-  high-order ZFS coefficients and the third-order T, R and F tensors are not
-  rotated there.
+  high-order zero-field splitting coefficients and the third-order T, R and F
+  tensors are not rotated there.
 - An electric-field powder average sums both signs of the electric field; for
   strictly symmetric cases the first-order modulated signal can cancel.

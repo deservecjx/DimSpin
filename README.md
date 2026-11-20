@@ -13,7 +13,7 @@ single-crystal analysis.
 ## Planned scope
 
 - Spin systems with electron spin `S` and nuclear spin `I`
-- Zeeman, zero-field splitting, hyperfine and high-order zero-field terms
+- Zeeman, zero-field splitting, hyperfine and high-order zero-field splitting terms
 - Magnetic-field modulation, electric-field modulation and parameter modulation
 - Single-crystal one-side, single-crystal rotation and powder modes
 - Resonance search with `High_Field_Method` and `Adaptive_Grid_Method`

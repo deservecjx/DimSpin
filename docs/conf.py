@@ -23,5 +23,10 @@ napoleon_google_docstring = False
 napoleon_numpy_docstring = False
 
 templates_path = []
+html_static_path = ["_static"]
 exclude_patterns = ["_build"]
 html_theme = "alabaster"
+
+# MathJax 3 is bundled under docs/_static/mathjax (Apache-2.0), so the built
+# documentation renders formulas without network access.
+mathjax_path = "mathjax/es5/tex-mml-chtml.js"

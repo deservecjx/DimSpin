@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Notes
 
-- `Fused_Method` is not included in this release.
+- A further resonance-search method, aimed at faster and more accurate root
+  finding, is under development and is not part of this release.
 - Archived on Zenodo: version DOI 10.5281/zenodo.24358713, concept DOI
   10.5281/zenodo.24358712.
