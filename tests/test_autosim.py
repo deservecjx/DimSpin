@@ -197,6 +197,20 @@ def test_powder_count_is_validated() -> None:
             spec.check_simpara()
 
 
+def test_worker_count_is_validated() -> None:
+    for value in (0, -1, 1.5):
+        spec = make_spec(max_workers=value)
+        with pytest.raises(ValueError):
+            spec.check_simpara()
+
+
+def test_autosim_sets_the_worker_count() -> None:
+    spec = make_spec()
+    spectrum = autosim(make_spin(), spec, show=False, parallel=False, max_workers=3)
+    assert spec.max_workers == 3
+    assert spectrum.shape == (spec.specpoints,)
+
+
 def test_space_group_parameters_are_validated() -> None:
     spec = make_spec(group_number=0)
     with pytest.raises(ValueError):

@@ -1,0 +1,27 @@
+"""Parameter modulation: the spectrum follows a change of g, D or A."""
+
+from dimspin import Spec, Spin, autosim
+
+
+def main():
+    spin = Spin(1/2, 0)
+    spin.g = [2.009, 2.006, 2.002]
+    spin.dg = [0.001, 0.001, 0.002]
+
+    spec = Spec()
+    spec.method = "High_Field_Method"
+    spec.sample = "Crystal_Oneside"
+    spec.modtype = "param"
+    spec.mwfreq = 9560.0
+    spec.fieldrange = [3300.0, 3600.0]
+    spec.specpoints = 800
+    spec.lw_lorentzian = 0.5
+    spec.lw_gaussian = 0.2
+    spec.Temperature = 298.0
+
+    spectrum = autosim(spin, spec, show=True)
+    print("spectrum shape:", spectrum.shape)
+
+
+if __name__ == "__main__":
+    main()

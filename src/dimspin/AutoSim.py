@@ -13,10 +13,12 @@ from .Class_Spec import Spec
 from .Class_Spin import Spin
 
 
-def autosim(*class_name, show=True, parallel=True):
+def autosim(*class_name, show=True, parallel=True, max_workers=None):
     """
     Inputs: one or more Spin objects followed by one Spec object; whether to
-    plot the result; whether to use a process pool.
+    plot the result; whether to use a process pool; number of worker
+    processes (``None`` keeps ``Spec.max_workers``, which defaults to a
+    built-in value).
 
     Returns: the spectrum array (see the module docstring for its shape).
 
@@ -25,13 +27,16 @@ def autosim(*class_name, show=True, parallel=True):
     are summed with their multiplicities. Parameter checks and the field grid
     expansion are done by ``Spec.check_simpara``. With ``show=True`` all three
     sample types are drawn: a line for one-side and powder, an angle-field map
-    for rotation.
+    for rotation. ``max_workers`` only matters when ``parallel`` is True, and
+    a count above the logical core count is allowed with a warning.
     """
     if len(class_name) < 2:
         raise ValueError("Autosim requires at least one Spin and one Spec to be entered as parameters")
     spec = class_name[-1]
     if not isinstance(spec, Spec):
         raise ValueError("The last parameter must be a Spec class!")
+    if max_workers is not None:
+        spec.max_workers = max_workers
     spec.check_simpara()
 
     spins = []

@@ -114,4 +114,6 @@ Parallel evaluation
 
 .. autofunction:: dimspin.Parallel.parallel_map
 
+.. autofunction:: dimspin.Parallel.resolve_workers
+
 .. autofunction:: dimspin.Parallel.check_worker_count

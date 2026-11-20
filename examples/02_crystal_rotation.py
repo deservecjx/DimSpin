@@ -16,6 +16,7 @@ def main():
     spec.fieldrange = [3200.0, 3800.0]
     spec.specpoints = 600
     spec.lw_lorentzian = 0.5
+    spec.lw_gaussian = 0.2
     spec.anglerange = [0, 180, 5]
     spec.Temperature = 298.0
 

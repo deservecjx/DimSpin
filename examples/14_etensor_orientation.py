@@ -1,0 +1,33 @@
+"""Crystal rotation with the electric-field coupling tensor tilted in the molecular frame."""
+
+import numpy as np
+
+from dimspin import Spec, Spin, autosim
+
+
+def main():
+    spin = Spin(1/2, 0)
+    spin.g = 2.0023
+    spin.T = np.zeros((3, 6))
+    spin.T[2, 2] = 0.2
+    spin.Etensor_orientation = [0.0, np.pi / 3, 0.0]
+
+    spec = Spec()
+    spec.method = "Adaptive_Grid_Method"
+    spec.sample = "Crystal_Rotation"
+    spec.mwfreq = 9800.0
+    spec.fieldrange = [3000.0, 4000.0]
+    spec.specpoints = 800
+    spec.lw_lorentzian = 5.0
+    spec.lw_gaussian = 2.0
+    spec.anglerange = [0, 180, 5]
+    spec.Emod = 1.0
+    spec.Edirection = [0.0, 0.0, 1.0]
+    spec.Temperature = 298.0
+
+    spectra = autosim(spin, spec, show=True)
+    print("spectrum map shape:", spectra.shape)
+
+
+if __name__ == "__main__":
+    main()

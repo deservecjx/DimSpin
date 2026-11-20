@@ -67,9 +67,10 @@ class Spec:
         'Adaptive_Grid_Method'. A field range given as two values is expanded
         to ``specpoints`` points; an already expanded axis must be uniformly
         spaced, and it sets ``specpoints`` when that is zero. The method is
-        idempotent. ``rotaxis`` is deprecated and unused: the rotation mode
-        turns the crystal about the laboratory x axis, and the initial
-        orientation comes from ``crystal_orientation``.
+        idempotent. ``max_workers``, when given, must be a positive integer.
+        ``rotaxis`` is deprecated and unused: the rotation mode turns the
+        crystal about the laboratory x axis, and the initial orientation comes
+        from ``crystal_orientation``.
         """
         self.mwfreq = _positive_number(self.mwfreq, 'mwfreq')
         self.Temperature = _positive_number(self.Temperature, 'Temperature')
@@ -176,6 +177,9 @@ class Spec:
             if count != self.npowder or count <= 0:
                 raise ValueError("'npowder' must be a positive integer.")
             self.npowder = count
+
+        if self.max_workers is not None:
+            self.max_workers = _positive_int(self.max_workers, 'max_workers')
 
         if self.method not in ('High_Field_Method', 'Adaptive_Grid_Method'):
             raise ValueError("Only 'High_Field_Method' or 'Adaptive_Grid_Method' is allowed.")

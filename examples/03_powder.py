@@ -16,6 +16,7 @@ def main():
     spec.fieldrange = [3300.0, 3600.0]
     spec.specpoints = 800
     spec.lw_lorentzian = 0.5
+    spec.lw_gaussian = 0.2
     spec.npowder = 1000
     spec.Temperature = 298.0
 
