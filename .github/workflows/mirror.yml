@@ -1,0 +1,38 @@
+name: mirror
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mirror-gitee
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push main and release tags to Gitee
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+        run: |
+          if [ -z "${GITEE_TOKEN}" ]; then
+            echo "GITEE_TOKEN secret is not set" >&2
+            exit 1
+          fi
+          git remote add gitee "https://deservecjx:${GITEE_TOKEN}@gitee.com/deservecjx/dim-spin.git"
+          git push gitee --force "refs/remotes/origin/main:refs/heads/main"
+          git fetch --tags origin
+          mapfile -t tags < <(git tag --list 'v*')
+          if [ "${#tags[@]}" -gt 0 ]; then
+            git push gitee --force "${tags[@]/#/refs/tags/}"
+          fi
