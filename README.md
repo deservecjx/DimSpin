@@ -7,6 +7,8 @@ spin-electric coupling (SEC) tensors (T, R, F), featuring electric-field
 modulation (EFM), magnetic-field modulation (MFM), and 2D angle-dependent
 single-crystal analysis.
 
+A read-only mirror is hosted on [Gitee](https://gitee.com/deservecjx/dim-spin).
+
 > **Status:** 0.1.0. Core modules, public API, documentation and examples are
 > in place.
 
