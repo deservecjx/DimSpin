@@ -205,7 +205,11 @@ Space-group expansion
    hexagonal axes for rhombohedral groups). It is optional: without it every
    symmetry operation is treated as a distinct site (general position), and
    with it the operations are grouped by the position they produce, so
-   special positions are counted correctly.
+   special positions are counted correctly. For a single spin centre this only
+   rescales the overall intensity, because every site of the orbit is repeated
+   equally; the relative weights change when several inequivalent centres are
+   combined. Tensors that do not satisfy the site symmetry give extra
+   orientations without ``frac_pos``, and a warning with it.
 
 Parallel settings
 ~~~~~~~~~~~~~~~~~
