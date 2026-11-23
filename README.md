@@ -9,7 +9,7 @@ single-crystal analysis.
 
 A read-only mirror is hosted on [Gitee](https://gitee.com/deservecjx/dim-spin).
 
-> **Status:** 0.1.0. Core modules, public API, documentation and examples are
+> **Status:** 0.1.1. Core modules, public API, documentation and examples are
 > in place.
 
 ## Planned scope

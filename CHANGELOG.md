@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-11-23
+
+### Added
+
+- `max_workers` keyword for `autosim`, with validation of `Spec.max_workers`.
+- `Spin.delta_orientation`, which orients the parameter-modulation amplitudes
+  and defaults to `tensor_orientation`.
+- Examples 06-14: parallel powder evaluation, hyperfine coupling, energy
+  levels, parameter modulation, high-order zero-field splitting, multiple
+  spin centres and the crystal, tensor and electric-tensor orientations.
+- `examples/published` with the TMCM-Mn MFM and EFM cases and the Ce(III)
+  powder MFM and EFM cases.
+- User guide covering every `Spin` and `Spec` parameter, and theory notes on
+  the SEC Hamiltonian, transition intensities, truncation and the scope of the
+  space-group expansion.
+
+### Changed
+
+- Euler angles are multiplied as `Rz(alpha) Ry(beta) Rz(gamma)`, matching the
+  EasySpin frame convention.
+- `dg`, `dD` and `dA` are rotated with `delta_orientation` in the rotation and
+  powder modes.
+- All spectrum examples use both Lorentzian and Gaussian linewidths.
+- Terminology unified as zero-field splitting.
+
+### Fixed
+
+- Documentation renders formulas without network access; MathJax is bundled
+  locally.
+
 ## [0.1.0] - 2026-11-19
 
 ### Added
