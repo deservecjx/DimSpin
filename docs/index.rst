@@ -44,8 +44,8 @@ Citation
 If you use DimSpin in your work, please cite the associated article
 (see ``CITATION.cff`` in the repository). The article is currently in
 preparation; until it is published, cite the archived software release.
-The concept DOI for all versions is doi:10.5281/zenodo.24358712; the 0.1.0
-release has doi:10.5281/zenodo.24358713.
+The concept DOI for all versions is doi:10.5281/zenodo.24358712; the 0.1.1
+release has doi:10.5281/zenodo.24459971.
 
 Contents
 --------

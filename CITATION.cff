@@ -9,7 +9,7 @@ version: "0.1.1"
 date-released: "2026-11-23"
 license: "MIT"
 repository-code: "https://github.com/deservecjx/DimSpin"
-doi: "10.5281/zenodo.24358713"
+doi: "10.5281/zenodo.24459971"
 identifiers:
   - type: doi
     value: "10.5281/zenodo.24358712"

@@ -34,6 +34,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation renders formulas without network access; MathJax is bundled
   locally.
 
+### Notes
+
+- Archived on Zenodo: version DOI 10.5281/zenodo.24459971, concept DOI
+  10.5281/zenodo.24358712.
+
 ## [0.1.0] - 2026-11-19
 
 ### Added

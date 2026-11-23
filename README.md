@@ -93,7 +93,7 @@ If you use DimSpin in your work, please cite the associated article:
 
 Until the article is published, please cite the archived software release:
 
-> DimSpin 0.1.0, Zenodo, doi:10.5281/zenodo.24358713 (version DOI);
+> DimSpin 0.1.1, Zenodo, doi:10.5281/zenodo.24459971 (version DOI);
 > doi:10.5281/zenodo.24358712 (concept DOI for all versions).
 
 Full citation metadata is provided in [CITATION.cff](CITATION.cff).
