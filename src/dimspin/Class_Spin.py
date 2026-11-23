@@ -147,10 +147,13 @@ class Spin:
 
         self.tensor_orientation = None
         self.Etensor_orientation = None
+        self.delta_orientation = None
         self.R_tf2lf = np.eye(3)
         self.R_tf2lf_rotated = np.eye(3)
         self.R_etf2lf = np.eye(3)
         self.R_etf2lf_rotated = np.eye(3)
+        self.R_dtf2lf = np.eye(3)
+        self.R_dtf2lf_rotated = np.eye(3)
 
     def clone(self):
         """
@@ -176,7 +179,9 @@ class Spin:
         whose columns are (D, E, yz, xz, xy) for the three electric-field
         directions, with the traceless diagonal block
         (-D/3 + E, -D/3 - E, 2D/3). T, R and F are stored as (3, 3, 3) stacks
-        and the component matrices Tx..Fz must be 3x3.
+        and the component matrices Tx..Fz must be 3x3. The coupling tensors use
+        ``Etensor_orientation`` and the modulation amplitudes use
+        ``delta_orientation``, which defaults to ``tensor_orientation``.
         B2^0/B2^2 duplicate the D tensor and cannot be given together with a
         nonzero D. Unrecognized shapes raise ValueError instead of being
         silently dropped.
@@ -296,11 +301,17 @@ class Spin:
             R_etf2mf = R_tf2mf
         else:
             R_etf2mf = resolve_orientation(self.Etensor_orientation)
+        if self.delta_orientation is None:
+            R_dtf2mf = R_tf2mf
+        else:
+            R_dtf2mf = resolve_orientation(self.delta_orientation)
 
         self.R_tf2lf = R_sf2lf @ (R_mf2sf @ R_tf2mf)
         self.R_etf2lf = R_sf2lf @ (R_mf2sf @ R_etf2mf)
+        self.R_dtf2lf = R_sf2lf @ (R_mf2sf @ R_dtf2mf)
         self.R_tf2lf_rotated = self.R_tf2lf
         self.R_etf2lf_rotated = self.R_etf2lf
+        self.R_dtf2lf_rotated = self.R_dtf2lf
 
     def update_Btensor(self):
         """
@@ -310,14 +321,16 @@ class Spin:
 
         Notes: call this before assembling a Hamiltonian. For the first angle
         or a single-crystal one-side simulation the rotation is the identity.
+        The modulation amplitudes use their own rotation ``R_dtf2lf_rotated``.
         """
         R = self.R_tf2lf_rotated
+        R_delta = self.R_dtf2lf_rotated
         self.g1 = R @ self.g @ R.T
         self.D1 = R @ self.D @ R.T
         self.A1 = R @ self.A @ R.T
-        self.dg1 = R @ self.dg @ R.T
-        self.dD1 = R @ self.dD @ R.T
-        self.dA1 = R @ self.dA @ R.T
+        self.dg1 = R_delta @ self.dg @ R_delta.T
+        self.dD1 = R_delta @ self.dD @ R_delta.T
+        self.dA1 = R_delta @ self.dA @ R_delta.T
 
         from .Team_Zeeman import H_Zeeman
         self.H_g_grad = H_Zeeman(1.0, self.g1, self.S, self.I)

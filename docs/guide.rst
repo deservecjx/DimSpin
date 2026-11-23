@@ -79,7 +79,8 @@ Parameter-modulation amplitudes
    Changes of ``g``, ``D`` and ``A`` used by parameter modulation, in the same
    input forms as the tensors themselves. They only contribute when
    ``Spec.modtype`` is ``"param"``, used, for example, when the perturbation
-   keeps a fixed orientation relative to the crystal.
+   keeps a fixed orientation relative to the crystal. Their orientation is
+   set by ``delta_orientation``.
 
 Spin-electric coupling tensors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -117,6 +118,9 @@ Tensor orientations
    ``tensor_orientation``: the two are applied separately, never composed, so
    tilting the E tensors relative to g, D and A requires passing the composed
    3x3 matrix. ``None`` makes it equal to ``tensor_orientation``.
+``delta_orientation``
+   Orientation of the parameter-modulation amplitudes dg, dD and dA, also in
+   the molecular frame. ``None`` makes it equal to ``tensor_orientation``.
 
 Spec parameters
 ---------------
@@ -187,10 +191,11 @@ Powder settings
 ~~~~~~~~~~~~~~~
 
 ``npowder``
-   Number of sampled crystallite orientations; the default is 2000. Each orientation
-   costs one resonance search, so this is the main cost of a powder run. For an
-   electric-field modulated spectrum every orientation is evaluated together with
-   its orientation-reversed partner.(the expected signal is zero)
+   Number of sampled crystallite orientations; the default is 2000. Each
+   orientation costs one resonance search, so this is the main cost of a
+   powder run. For an electric-field modulated spectrum every orientation is
+   evaluated together with its oppositely oriented partner, which cancels the
+   first-order response; the expected signal is zero.
 
 Space-group expansion
 ~~~~~~~~~~~~~~~~~~~~~

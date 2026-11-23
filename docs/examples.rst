@@ -84,3 +84,33 @@ Electric tensor orientation
 
 .. literalinclude:: ../examples/14_etensor_orientation.py
    :language: python
+
+Published cases
+---------------
+
+The scripts below reproduce simulations from published work; the parameters
+are taken from the cited articles.
+
+TMCM-Mn with magnetic-field modulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../examples/published/tmcm_mn_mfm.py
+   :language: python
+
+TMCM-Mn with parameter modulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../examples/published/tmcm_mn_efm.py
+   :language: python
+
+Ce(III) powder with magnetic-field modulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../examples/published/ce_powder_mfm.py
+   :language: python
+
+Ce(III) powder with electric-field modulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. literalinclude:: ../examples/published/ce_powder_efm.py
+   :language: python

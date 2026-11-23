@@ -33,6 +33,23 @@ def test_zyz_rotation_is_orthogonal() -> None:
     assert np.isclose(np.linalg.det(matrix), 1.0)
 
 
+def test_euler_angles_follow_easyspin_frame_order() -> None:
+    alpha, beta, gamma = 0.3, 0.4, 0.5
+
+    def Rz(angle):
+        return np.array([[np.cos(angle), np.sin(angle), 0.0],
+                         [-np.sin(angle), np.cos(angle), 0.0],
+                         [0.0, 0.0, 1.0]])
+
+    def Ry(angle):
+        return np.array([[np.cos(angle), 0.0, -np.sin(angle)],
+                         [0.0, 1.0, 0.0],
+                         [np.sin(angle), 0.0, np.cos(angle)]])
+
+    expected = Rz(alpha) @ Ry(beta) @ Rz(gamma)
+    assert np.allclose(eular2rotzyz(alpha, beta, gamma), expected)
+
+
 def test_resolve_orientation_accepts_matrix_and_euler_angles() -> None:
     matrix = rotation_matrix([0.0, 1.0, 0.0], 0.4)
     assert np.allclose(resolve_orientation(matrix), matrix)

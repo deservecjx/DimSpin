@@ -6,10 +6,10 @@ which is equivalent to broadening every orientation separately because the
 convolution is linear.
 
 For an electric-field modulated spectrum each sampled orientation is
-evaluated together with its electric-field-reversed partner, obtained by a
-half turn about an axis perpendicular to the electric field. When the
-electric field is zero there is no partner and only the sampled orientations
-are used.
+evaluated together with its oppositely oriented partner, obtained by a half
+turn about an axis perpendicular to the electric field. When the electric
+field is zero there is no partner and only the sampled orientations are
+used.
 """
 
 import math
@@ -52,12 +52,14 @@ def _one_orientation(spin, spec, Rrot, Rrot_average):
     spin = spin.clone()
     spin.R_tf2lf_rotated = Rrot @ spin.R_tf2lf
     spin.R_etf2lf_rotated = Rrot @ spin.R_etf2lf
+    spin.R_dtf2lf_rotated = Rrot @ spin.R_dtf2lf
     pos1, int1 = spec_transitions(spin, spec)
     if Rrot_average is None:
         return pos1, int1
 
     spin.R_tf2lf_rotated = Rrot_average @ (Rrot @ spin.R_tf2lf)
     spin.R_etf2lf_rotated = Rrot_average @ (Rrot @ spin.R_etf2lf)
+    spin.R_dtf2lf_rotated = Rrot_average @ (Rrot @ spin.R_dtf2lf)
     pos2, int2 = spec_transitions(spin, spec)
 
     return np.concatenate([pos1, pos2]), np.concatenate([int1, int2])

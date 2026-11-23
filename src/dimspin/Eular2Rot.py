@@ -16,10 +16,10 @@ def cos(a):
 
 def eular2rotzyz(alpha, beta, gamma):
     """Return the zyz rotation matrix for angles in radians."""
-    Rz = np.array([[cos(alpha), sin(alpha), 0], [-sin(alpha), cos(alpha), 0], [0, 0, 1]])
-    Ry = np.array([[cos(beta), 0, -sin(beta)], [0, 1, 0], [sin(beta), 0, cos(beta)]])
-    Rz1 = np.array([[cos(gamma), sin(gamma), 0], [-sin(gamma), cos(gamma), 0], [0, 0, 1]])
-    return Rz1 @ Ry @ Rz
+    Rz_alpha = np.array([[cos(alpha), sin(alpha), 0], [-sin(alpha), cos(alpha), 0], [0, 0, 1]])
+    Ry_beta = np.array([[cos(beta), 0, -sin(beta)], [0, 1, 0], [sin(beta), 0, cos(beta)]])
+    Rz_gamma = np.array([[cos(gamma), sin(gamma), 0], [-sin(gamma), cos(gamma), 0], [0, 0, 1]])
+    return Rz_alpha @ Ry_beta @ Rz_gamma
 
 
 def resolve_orientation(ori):

@@ -44,6 +44,7 @@ def _one_angle(spin, spec, angle):
     Rotangle = rotation_matrix(axis, radian)
     spin.R_tf2lf_rotated = Rotangle @ spin.R_tf2lf
     spin.R_etf2lf_rotated = Rotangle @ spin.R_etf2lf
+    spin.R_dtf2lf_rotated = Rotangle @ spin.R_dtf2lf
     if spec.modtype == 'Emod':
         spec.E1 = spec.Emod * np.dot(Rotangle, spec.Edirection)
     return spec_oneside(spin, spec)

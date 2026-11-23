@@ -229,3 +229,41 @@ def test_clearing_a_nonzero_hyperfine_warns(caplog) -> None:
     with caplog.at_level(logging.WARNING):
         spin.identity_tensor()
     assert any('hyperfine' in record.getMessage() for record in caplog.records)
+
+
+def test_modulation_amplitudes_default_to_the_tensor_frame() -> None:
+    spin = quiet_spin(S=1/2, I=0)
+    spin.g = [2.0, 2.1, 1.9]
+    spin.dg = [0.01, 0.02, 0.03]
+    spin.tensor_orientation = [0.0, np.pi / 4, 0.0]
+    spin.identity_tensor()
+
+    assert np.allclose(spin.R_dtf2lf, spin.R_tf2lf)
+    spin.update_Btensor()
+    assert np.allclose(spin.dg1, spin.R_tf2lf @ spin.dg @ spin.R_tf2lf.T)
+
+
+def test_modulation_amplitudes_ignore_the_e_tensor_frame() -> None:
+    spin = quiet_spin(S=1/2, I=0)
+    spin.g = [2.0, 2.1, 1.9]
+    spin.dg = [0.01, 0.02, 0.03]
+    spin.Etensor_orientation = [0.0, np.pi / 3, 0.0]
+    spin.identity_tensor()
+
+    assert np.allclose(spin.R_dtf2lf, spin.R_tf2lf)
+    assert not np.allclose(spin.R_dtf2lf, spin.R_etf2lf)
+    spin.update_Btensor()
+    assert np.allclose(spin.dg1, spin.R_tf2lf @ spin.dg @ spin.R_tf2lf.T)
+
+
+def test_delta_orientation_is_independent_of_the_e_tensor_frame() -> None:
+    from dimspin.Eular2Rot import resolve_orientation
+
+    spin = quiet_spin(S=1/2, I=0)
+    spin.dg = [0.01, 0.02, 0.03]
+    spin.Etensor_orientation = [0.0, np.pi / 3, 0.0]
+    spin.delta_orientation = [0.0, np.pi / 6, 0.0]
+    spin.identity_tensor()
+
+    assert np.allclose(spin.R_dtf2lf, resolve_orientation([0.0, np.pi / 6, 0.0]))
+    assert not np.allclose(spin.R_dtf2lf, spin.R_etf2lf)
