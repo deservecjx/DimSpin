@@ -198,7 +198,10 @@ Space-group expansion
 ``group_number``
    Space-group number from 1 to 230. When it is set, each spin is expanded
    into its magnetically inequivalent orientations and the spectra are summed
-   with their multiplicities.
+   with their multiplicities. The expansion rotates g, D and A only, so it is
+   guaranteed to be correct for magnetic-field modulation of systems described
+   by g, D and A; electric-field and parameter modulation, and high-order
+   zero-field terms, are not covered yet (see :doc:`theory`).
 ``frac_pos``
    Fractional coordinate of the spin centre in the unit cell, a 3-vector in
    the standard setting of the group (unique axis b for monoclinic groups,
